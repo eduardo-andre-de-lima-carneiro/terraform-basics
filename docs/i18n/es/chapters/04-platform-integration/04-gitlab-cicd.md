@@ -36,6 +36,8 @@ apply:
 
 La sobrescritura `entrypoint: [""]` es obligatoria: la imagen `hashicorp/terraform` ejecuta el binario de Terraform como su entrypoint, así que sin ella las líneas de `script` no pueden arrancar una shell.
 
+GitLab ya no distribuye su propia plantilla de pipeline de Terraform ni la imagen de job asociada; el pipeline de arriba usa directamente la imagen `hashicorp/terraform` de HashiCorp, que sigue siendo una forma válida y sin dependencias de ejecutar comandos de Terraform en un job. Para un proyecto más grande, la recomendación actual de GitLab es construir pipelines de validate/plan/apply a partir de [componentes de CI/CD](https://docs.gitlab.com/ee/ci/components/) reutilizables de su catálogo en lugar de escribir cada etapa a mano.
+
 ## Buenas prácticas
 
 - Mantén `apply` como un job manual en la rama por defecto para que una persona lo confirme.
@@ -51,3 +53,4 @@ La sobrescritura `entrypoint: [""]` es obligatoria: la imagen `hashicorp/terrafo
 - [CI/CD variables (masked and protected)](https://docs.gitlab.com/ee/ci/variables/)
 - [Job artifacts](https://docs.gitlab.com/ee/ci/jobs/job_artifacts.html)
 - [hashicorp/terraform image](https://hub.docker.com/r/hashicorp/terraform)
+- [CI/CD components](https://docs.gitlab.com/ee/ci/components/)

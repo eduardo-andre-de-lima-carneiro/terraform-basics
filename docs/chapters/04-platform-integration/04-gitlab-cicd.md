@@ -36,6 +36,8 @@ apply:
 
 The `entrypoint: [""]` override is required: the `hashicorp/terraform` image runs the Terraform binary as its entrypoint, so without it the `script` lines cannot start a shell.
 
+GitLab no longer ships its own bundled Terraform pipeline template and job image; the pipeline above uses HashiCorp's own `hashicorp/terraform` image directly, which stays a valid, dependency-free way to run Terraform commands in a job. For a larger project, GitLab's current recommendation is to build validate/plan/apply pipelines from reusable [CI/CD components](https://docs.gitlab.com/ee/ci/components/) from its catalog instead of hand-writing every stage.
+
 ## Good practices
 
 - Keep `apply` a manual job on the default branch so a human confirms it.
@@ -51,3 +53,4 @@ The `entrypoint: [""]` override is required: the `hashicorp/terraform` image run
 - [CI/CD variables (masked and protected)](https://docs.gitlab.com/ee/ci/variables/)
 - [Job artifacts](https://docs.gitlab.com/ee/ci/jobs/job_artifacts.html)
 - [hashicorp/terraform image](https://hub.docker.com/r/hashicorp/terraform)
+- [CI/CD components](https://docs.gitlab.com/ee/ci/components/)

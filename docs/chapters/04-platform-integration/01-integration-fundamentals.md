@@ -15,6 +15,15 @@ Running Terraform on a platform adds collaboration and delivery services around 
 
 Runs can execute in a generic CI job or in a dedicated Terraform platform. A generic job is flexible; a dedicated platform adds state storage, locking, run history, and policy checks without extra scripting.
 
+| Concern | Generic CI job (Chapters 4.3-4.5) | Dedicated Terraform platform (Chapter 4.2) |
+| --- | --- | --- |
+| State storage and locking | You configure a backend yourself | Built in, no backend block needed |
+| Run history and plan diffs | Whatever the CI system's logs keep | Kept per workspace, searchable |
+| Policy checks (Sentinel/OPA) | Requires a separate tool or script | Native, can block a plan or apply |
+| Setup effort | Low: reuse the pipeline you already have | Higher: a new platform, org, and workspace to learn |
+
+Neither option is strictly better; a small team already living in GitHub or GitLab often starts with a generic job, then adopts a dedicated platform once state locking or policy checks become a real need.
+
 ## What to configure
 
 At minimum, agree on the default branch, branch protection, plan-on-PR, apply-on-merge, who can approve an apply, where state lives, and how secrets are injected. These policies are part of the delivery process, not optional decoration.

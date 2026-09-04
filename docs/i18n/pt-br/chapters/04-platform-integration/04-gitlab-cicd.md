@@ -36,6 +36,8 @@ apply:
 
 O override `entrypoint: [""]` é obrigatório: a imagem `hashicorp/terraform` executa o binário do Terraform como seu entrypoint, então, sem ele, as linhas de `script` não conseguem iniciar um shell.
 
+O GitLab não distribui mais seu próprio template de pipeline do Terraform nem a imagem de job associada; o pipeline acima usa diretamente a imagem `hashicorp/terraform` da HashiCorp, que continua sendo uma forma válida e sem dependências de rodar comandos do Terraform em um job. Para um projeto maior, a recomendação atual do GitLab é montar pipelines de validate/plan/apply a partir de [componentes de CI/CD](https://docs.gitlab.com/ee/ci/components/) reutilizáveis do seu catálogo, em vez de escrever cada estágio manualmente.
+
 ## Boas práticas
 
 - Mantenha o `apply` como um job manual na branch padrão para que um humano o confirme.
@@ -51,3 +53,4 @@ O override `entrypoint: [""]` é obrigatório: a imagem `hashicorp/terraform` ex
 - [CI/CD variables (masked and protected)](https://docs.gitlab.com/ee/ci/variables/)
 - [Job artifacts](https://docs.gitlab.com/ee/ci/jobs/job_artifacts.html)
 - [hashicorp/terraform image](https://hub.docker.com/r/hashicorp/terraform)
+- [CI/CD components](https://docs.gitlab.com/ee/ci/components/)

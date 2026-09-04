@@ -3,13 +3,13 @@
 Antes de considerar uma integração pronta, verifique o seguinte:
 
 - A configuração do backend está correta e não contém nenhum segredo em texto simples.
-- A autenticação usa OIDC, uma service connection ou um token com escopo, não uma chave de nuvem de longa duração no repositório.
-- O state é armazenado em um backend remoto com locking ou em um workspace da plataforma, nunca no controle de versão.
+- A autenticação usa OIDC, uma service connection ou um token com escopo, não uma chave de nuvem de longa duração no repositório. **Sem isso:** uma chave vazada continua funcionando até alguém perceber e rotacioná-la manualmente, e ela normalmente concede mais permissões do que o pipeline realmente precisa.
+- O state é armazenado em um backend remoto com locking ou em um workspace da plataforma, nunca no controle de versão. **Sem locking:** duas execuções escrevendo o state ao mesmo tempo podem corrompê-lo ou aplicar silenciosamente metade de um plano desatualizado.
 - O `terraform plan` roda automaticamente em pull requests e sua saída é visível para os revisores.
 - Arquivos de plano salvos e artefatos de plano são tratados como sensíveis: acesso restrito, retenção curta, nunca públicos.
 - O `terraform apply` roda somente após o merge, atrás de uma aprovação obrigatória ou ambiente protegido.
 - Os segredos de CI/CD são armazenados no gerenciador de segredos da plataforma e mascarados nos logs.
-- As versões de providers e módulos estão fixadas, e o arquivo de lock de dependências `.terraform.lock.hcl` passou por commit.
+- As versões de providers e módulos estão fixadas, e o arquivo de lock de dependências `.terraform.lock.hcl` passou por commit. **Sem o arquivo de lock:** a mesma configuração pode resolver uma versão de provider diferente na próxima execução e aplicar mudanças que ninguém escreveu.
 - As operações de destroy estão desativadas ou exigem uma aprovação separada e explícita.
 - Verificações de política (Sentinel, OPA ou um linter) rodam antes do apply quando apropriado.
 - O acesso é revisado quando uma pessoa, token, runner ou serviço muda de papel.

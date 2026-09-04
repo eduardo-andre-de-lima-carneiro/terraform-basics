@@ -40,10 +40,15 @@ steps:
 - Almacena la configuración del backend y cualquier token como variables secretas de pipeline o en un grupo de variables respaldado por un key vault.
 - El artefacto de plan publicado contiene valores de configuración y de state en texto plano; restringe quién puede descargar los artefactos de pipeline y mantén una retención corta.
 
+## Service connection: secreto frente a workload identity federation
+
+Una service connection de Azure Resource Manager puede guardar un secreto de service principal o usar workload identity federation. Un secreto es una credencial almacenada que un script o un log de pipeline filtrado podría exponer, y necesita rotación manual antes de que expire. La workload identity federation no deja ningún secreto en Azure DevOps: Microsoft Entra confía en los tokens emitidos para esa service connection concreta y devuelve una credencial de corta duración en cada ejecución. Microsoft recomienda ahora la workload identity federation para las nuevas service connections de Azure Resource Manager y ofrece una conversión de un clic para las que ya usan secreto.
+
 ## Referencias
 
 - [Terraform on Azure documentation (Microsoft Learn)](https://learn.microsoft.com/en-us/azure/developer/terraform/overview)
 - [Terraform extension for Azure Pipelines](https://marketplace.visualstudio.com/items?itemName=ms-devlabs.custom-terraform-tasks)
 - [Service connections](https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints)
+- [Use an Azure Resource Manager service connection](https://learn.microsoft.com/en-us/azure/devops/pipelines/library/connect-to-azure)
 - [Approvals and checks for environments](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/approvals)
 - [Link secrets from an Azure key vault](https://learn.microsoft.com/en-us/azure/devops/pipelines/release/azure-key-vault)

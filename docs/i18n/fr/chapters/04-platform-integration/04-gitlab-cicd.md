@@ -36,6 +36,8 @@ apply:
 
 Le remplacement `entrypoint: [""]` est indispensable : l'image `hashicorp/terraform` exécute le binaire Terraform comme point d'entrée, donc sans cela les lignes `script` ne peuvent pas lancer de shell.
 
+GitLab ne distribue plus son propre template de pipeline Terraform ni l'image de job associée ; le pipeline ci-dessus utilise directement l'image `hashicorp/terraform` de HashiCorp, ce qui reste un moyen valable et sans dépendance d'exécuter des commandes Terraform dans un job. Pour un projet plus important, la recommandation actuelle de GitLab est de construire des pipelines validate/plan/apply à partir de [composants CI/CD](https://docs.gitlab.com/ee/ci/components/) réutilisables issus de son catalogue plutôt que d'écrire chaque étape à la main.
+
 ## Bonnes pratiques
 
 - Gardez `apply` comme un job manuel sur la branche par défaut afin qu'un humain le confirme.
@@ -51,3 +53,4 @@ Le remplacement `entrypoint: [""]` est indispensable : l'image `hashicorp/terraf
 - [CI/CD variables (masked and protected)](https://docs.gitlab.com/ee/ci/variables/)
 - [Job artifacts](https://docs.gitlab.com/ee/ci/jobs/job_artifacts.html)
 - [hashicorp/terraform image](https://hub.docker.com/r/hashicorp/terraform)
+- [CI/CD components](https://docs.gitlab.com/ee/ci/components/)

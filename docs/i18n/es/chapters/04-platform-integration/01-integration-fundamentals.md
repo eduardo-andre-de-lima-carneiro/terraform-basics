@@ -15,6 +15,15 @@ Ejecutar Terraform en una plataforma añade servicios de colaboración y entrega
 
 Las ejecuciones pueden correr en un job de CI genérico o en una plataforma de Terraform dedicada. Un job genérico es flexible; una plataforma dedicada añade almacenamiento de state, bloqueo, historial de ejecuciones y comprobaciones de políticas sin scripts adicionales.
 
+| Aspecto | Job de CI genérico (capítulos 4.3-4.5) | Plataforma de Terraform dedicada (capítulo 4.2) |
+| --- | --- | --- |
+| Almacenamiento de state y bloqueo | Tú configuras un backend | Incluido, sin necesidad de bloque de backend |
+| Historial de ejecuciones y diffs de plan | Lo que conserven los logs del sistema de CI | Se conserva por workspace, es buscable |
+| Comprobaciones de políticas (Sentinel/OPA) | Requiere una herramienta o script aparte | Nativas, pueden bloquear un plan o un apply |
+| Esfuerzo de configuración | Bajo: reutilizas el pipeline que ya tienes | Mayor: hay que aprender una plataforma, org y workspace nuevos |
+
+Ninguna opción es estrictamente mejor; un equipo pequeño que ya vive en GitHub o GitLab suele empezar con un job genérico y adoptar una plataforma dedicada cuando el bloqueo del state o las comprobaciones de políticas se vuelven una necesidad real.
+
 ## Qué hay que configurar
 
 Como mínimo, hay que acordar la rama por defecto, la protección de ramas, plan en el PR, apply en el merge, quién puede aprobar un apply, dónde vive el state y cómo se inyectan los secretos. Estas políticas son parte del proceso de entrega, no un adorno opcional.

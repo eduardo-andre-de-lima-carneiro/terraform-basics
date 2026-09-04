@@ -40,10 +40,15 @@ O `TerraformInstaller@1` vem da extensão do Terraform para o Azure Pipelines; a
 - Armazene a configuração do backend e quaisquer tokens como variáveis de pipeline secretas ou em um variable group respaldado por um key vault.
 - O artefato de plano publicado contém valores de configuração e de state em texto claro; restrinja quem pode baixar os artefatos de pipeline e mantenha a retenção curta.
 
+## Service connection: secret ou workload identity federation
+
+Uma service connection do Azure Resource Manager pode guardar um secret de service principal ou usar workload identity federation. Um secret é uma credencial armazenada que um script ou um log de pipeline vazado poderia expor, e precisa de rotação manual antes de expirar. A workload identity federation não deixa nenhum secret no Azure DevOps: o Microsoft Entra confia nos tokens emitidos para aquela service connection específica e devolve uma credencial de curta duração a cada execução. A Microsoft agora recomenda workload identity federation para novas service connections do Azure Resource Manager e oferece uma conversão de um clique para as que ainda usam secret.
+
 ## Referências
 
 - [Terraform on Azure documentation (Microsoft Learn)](https://learn.microsoft.com/en-us/azure/developer/terraform/overview)
 - [Terraform extension for Azure Pipelines](https://marketplace.visualstudio.com/items?itemName=ms-devlabs.custom-terraform-tasks)
 - [Service connections](https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints)
+- [Use an Azure Resource Manager service connection](https://learn.microsoft.com/en-us/azure/devops/pipelines/library/connect-to-azure)
 - [Approvals and checks for environments](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/approvals)
 - [Link secrets from an Azure key vault](https://learn.microsoft.com/en-us/azure/devops/pipelines/release/azure-key-vault)
