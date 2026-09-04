@@ -2,10 +2,10 @@
 
 Cualquier editor con soporte para Language Server Protocol puede usar `terraform-ls`.
 
-- **Sublime Text:** el paquete LSP más una configuración auxiliar `LSP-terraform`.
-- **Emacs:** `lsp-mode` o `eglot` apuntando a `terraform-ls`, con `terraform-mode` para la sintaxis.
-- **Zed:** incluye soporte de lenguaje para Terraform que usa `terraform-ls` automáticamente.
-- **Helix:** configuración integrada para `terraform-ls`; instala el binario y se conecta.
+- **Sublime Text:** el paquete LSP más el paquete auxiliar `LSP-terraform`, instalados mediante Package Control.
+- **Emacs:** `lsp-mode` (conectado a `terraform-mode`) o `eglot` apuntando a `terraform-ls`, con `terraform-mode` para la sintaxis y la indentación.
+- **Zed:** no viene integrado; instala la [extensión Terraform](https://github.com/zed-extensions/terraform) de la comunidad desde el panel de extensiones de Zed; después ejecuta `terraform-ls` por ti.
+- **Helix:** incluye una definición de lenguaje `hcl` (que también cubre los archivos `.tf`) preconfigurada para usar `terraform-ls`; instala el binario en el `PATH` y se conecta sin configuración adicional.
 
 Para editores sin language server, aún obtienes valor de `terraform fmt` como hook al guardar y de `terraform validate` como comando de build.
 
@@ -18,4 +18,5 @@ Elige tu editor, instala `terraform-ls` en el `PATH` y confirma que el autocompl
 - [terraform-ls (Terraform language server)](https://github.com/hashicorp/terraform-ls)
 - [terraform-ls usage guide](https://github.com/hashicorp/terraform-ls/blob/main/docs/USAGE.md)
 - [Helix language support](https://docs.helix-editor.com/lang-support.html)
-- [Zed languages](https://zed.dev/docs/languages)
+- [Zed: Terraform language docs](https://zed.dev/docs/languages/terraform)
+- [zed-extensions/terraform](https://github.com/zed-extensions/terraform)
